@@ -29,7 +29,14 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="inNombre"/>
+           <widget class="QLineEdit" name="inNombre">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Nombre &lt;/span&gt;del obrero.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="placeholderText">
+             <string>Ingrese el nombre del obrero</string>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_2">
@@ -40,6 +47,9 @@
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="inHoras">
+            <property name="toolTip">
+             <string>Número de horas trabajdas en la semana</string>
+            </property>
             <property name="maximum">
              <number>50</number>
             </property>
@@ -50,6 +60,9 @@
        </item>
        <item>
         <widget class="QGroupBox" name="groupBox">
+         <property name="toolTip">
+          <string>Seleccione la jornada laboral</string>
+         </property>
          <property name="title">
           <string>Jornada</string>
          </property>
@@ -99,6 +112,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="cmdCalcular">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="toolTip">
+             <string>Calcular el salario semanal</string>
+            </property>
             <property name="text">
              <string>Calcular</string>
             </property>
@@ -149,29 +168,66 @@
    </property>
    <widget class="QMenu" name="menuArchivo">
     <property name="title">
-     <string>Archivo</string>
+     <string>&amp;Archivo</string>
     </property>
-    <addaction name="actionCalcular"/>
-    <addaction name="actionBorrar"/>
+    <addaction name="action_Nuevo"/>
+    <addaction name="mnuAbrir"/>
+    <addaction name="mnuGuardar"/>
     <addaction name="separator"/>
-    <addaction name="actionSalir"/>
+    <addaction name="mnuCalcular"/>
+    <addaction name="separator"/>
+    <addaction name="mnuSalir"/>
+   </widget>
+   <widget class="QMenu" name="menuAyuda">
+    <property name="title">
+     <string>Ayuda</string>
+    </property>
+    <addaction name="actionAcerca_de"/>
    </widget>
    <addaction name="menuArchivo"/>
+   <addaction name="menuAyuda"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionCalcular">
+  <action name="mnuAbrir">
    <property name="text">
-    <string>Calcular</string>
+    <string>A&amp;brir</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="actionBorrar">
+  <action name="mnuGuardar">
    <property name="text">
-    <string>Borrar</string>
+    <string>&amp;Guardar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionSalir">
+  <action name="mnuCalcular">
    <property name="text">
-    <string>Salir</string>
+    <string>&amp;Calcular</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="mnuSalir">
+   <property name="text">
+    <string>&amp;Salir</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionAcerca_de">
+   <property name="text">
+    <string>Acerca de</string>
+   </property>
+  </action>
+  <action name="action_Nuevo">
+   <property name="text">
+    <string>&amp;Nuevo</string>
    </property>
   </action>
  </widget>

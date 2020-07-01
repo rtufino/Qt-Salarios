@@ -1,6 +1,9 @@
 #include "principal.h"
 #include "ui_principal.h"
 
+#include <QFileDialog>
+#include <QDebug>
+
 Principal::Principal(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Principal)
@@ -8,6 +11,12 @@ Principal::Principal(QWidget *parent)
     ui->setupUi(this);
     connect(ui->cmdCalcular, SIGNAL(released()),
             this, SLOT(calcular()));
+    connect(ui->mnuCalcular, SIGNAL(triggered(bool)),
+            this, SLOT(calcular()));
+    connect(ui->mnuSalir, SIGNAL(triggered(bool)),
+            this, SLOT(close()));
+    connect(ui->mnuGuardar, SIGNAL(triggered(bool)),
+            this, SLOT(guardar()));
 }
 
 Principal::~Principal()
@@ -20,6 +29,13 @@ void Principal::calcular()
     // obtener datos
     QString nombre = ui->inNombre->text();
     int horas = ui->inHoras->value();
+
+    if (nombre == "" || horas == 0){
+        ui->statusbar->showMessage("No se han ingresado datos para calcular.",5000);
+        return;
+    }else{
+        ui->statusbar->clearMessage();
+    }
 
     float const HORA_EXTRA = 20.10;
 
@@ -44,6 +60,7 @@ void Principal::calcular()
     float descuento = salario * 9.5 / 100;
     float salario_neto = salario - descuento;
 
+
     // Imprimir resultados
     QString resultado = "\nObrero: " + nombre + "\n";
     resultado += "Salario: $" + QString::number(salario) + "\n";
@@ -52,5 +69,30 @@ void Principal::calcular()
     resultado += "--\n";
 
     ui->outResultado->appendPlainText(resultado);
+    limpiar();
+}
+
+void Principal::guardar()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+                       "Guardar datos", QDir::home().absolutePath(), "Archivo de texto (*.txt)");
+    QFile data(fileName);
+
+    if (data.open(QFile::WriteOnly | QFile::Truncate)) {
+        QTextStream salida(&data);
+        salida << ui->outResultado->toPlainText();
+        ui->statusbar->showMessage("Datos almacenados en " + fileName,5000);
+    }
+
+    data.close();
+}
+
+void Principal::limpiar()
+{
+    ui->inNombre->setText("");
+    ui->inHoras->setValue(0);
+    ui->inMatutina->setChecked(true);
+    ui->inNombre->setFocus();
+
 }
 

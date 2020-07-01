@@ -17,10 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    principal.cpp
+    principal.cpp \
+    salario.cpp
 
 HEADERS += \
-    principal.h
+    principal.h \
+    salario.h
 
 FORMS += \
     principal.ui

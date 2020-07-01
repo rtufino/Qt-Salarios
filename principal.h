@@ -17,8 +17,10 @@ public:
 
 public slots:
     void calcular();
+    void guardar();
 
 private:
     Ui::Principal *ui;
+    void limpiar();
 };
 #endif // PRINCIPAL_H
